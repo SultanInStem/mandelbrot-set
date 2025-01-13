@@ -8,11 +8,17 @@ class Canvas:
         self.screen = pygame.display.set_mode(size)
         self.clock = pygame.time.Clock()
     def handle_events(self): 
-        pass 
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.running = False
     def update(self): 
         pass 
     def render(self): 
-        pass 
+        self.screen.fill((0,0,0))
+
+
+        pygame.display.flip()
+        self.clock.tick(60)
     def run(self): 
         while(self.running): 
             self.handle_events()
