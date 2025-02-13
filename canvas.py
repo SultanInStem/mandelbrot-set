@@ -13,22 +13,10 @@ class Canvas:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
-    def update(self): 
-        for x in range(0, self.screen_size[0]): 
-            for y in range(0, self.screen_size[1]): 
-                z = 0 
-                # c = a + bi
-                # f(z) = z^2 + c
-                # f(0) = c 
-                # f(c) = c^2 + c 
-                # f(c ^2 + c) = (c^2 + c)^2 + c
-                # for _ in range(0, self.max_iterations): 
-                
-                    
-                    
-                self.screen.set_at((x,y), (255,0,255))
+    def update(self):                     
+        pass 
     def render(self): 
-        # self.screen.fill((0,0,0))
+        self.screen.fill((0,0,0))
 
 
         pygame.display.flip()
