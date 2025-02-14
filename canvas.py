@@ -13,29 +13,33 @@ class Canvas:
         self.screen_size = self.screen.get_size()
 
         self.points = []
-        bounds = 2
-
-        
-
+        bounds = 10
 
         for x in range(0, SCREEN_SIZE[0],10): 
             for y in range(0, SCREEN_SIZE[1],10): 
                 ### test a point
                 c = [x,y]
+                is_included = True
+                if c[0]**2 + c[1]**2 > bounds: continue
                 seq = [c]
+                
                 for z in range(1, self.max_iterations): 
                     res = [seq[z - 1][0]**2 - seq[z - 1][1]**2, 2*seq[z - 1][0]*seq[z - 1][1]]
                     res[0] += c[0]
                     res[1] += c[1]
                     seq.append(res)
-                    if res[0]**2 + res[1]**2 > 4: pass
+                    if res[0]**2 + res[1]**2 > bounds:
+                        is_included = False
+                        break 
+                if is_included: 
+                    self.points.append((x,y))
 
     def handle_events(self): 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
-    def update(self):     
-        print(self.points)                
+    def update(self):        
+        print(self.points)         
         pass 
     def render(self): 
         self.screen.fill((0,0,0))
