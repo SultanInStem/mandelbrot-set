@@ -1,6 +1,6 @@
 import pygame
 import sys
-from globals import square_complex_num, get_complex_mag, SCREEN_SIZE
+from globals import square_complex_num, get_complex_mag, SCREEN_SIZE, to_math_coords, to_screen_coords
 from complex_num import ComplexNumber
 class Canvas: 
     def __init__(self): 
@@ -13,32 +13,29 @@ class Canvas:
         self.screen_size = self.screen.get_size()
 
         self.points = []
-        bounds = 100
+        bounds = 2
 
         
 
 
-        for x in range(0, SCREEN_SIZE[0]): 
-            for y in range(0, SCREEN_SIZE[1]): 
-                ### test a point 
+        for x in range(0, SCREEN_SIZE[0],10): 
+            for y in range(0, SCREEN_SIZE[1],10): 
+                ### test a point
                 c = [x,y]
-                sequence = [c]
-                if abs(get_complex_mag(c)) > bounds: break
+                seq = [c]
                 for z in range(1, self.max_iterations): 
-                    res = square_complex_num(sequence[z - 1]) 
+                    res = [seq[z - 1][0]**2 - seq[z - 1][1]**2, 2*seq[z - 1][0]*seq[z - 1][1]]
                     res[0] += c[0]
                     res[1] += c[1]
-                    if get_complex_mag(res) > bounds: break
-                    sequence.append(res)
-                self.points.append((x,y))                
-
-
+                    seq.append(res)
+                    if res[0]**2 + res[1]**2 > 4: pass
 
     def handle_events(self): 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
-    def update(self):                     
+    def update(self):     
+        print(self.points)                
         pass 
     def render(self): 
         self.screen.fill((0,0,0))
