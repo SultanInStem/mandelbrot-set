@@ -1,6 +1,6 @@
 import pygame
 import sys
-from globals import SCREEN_SIZE, to_math_coords
+from globals import SCREEN_SIZE, to_math_coords, BOUNDS
 from complex_num import ComplexNumber
 class Canvas: 
     def __init__(self): 
@@ -12,24 +12,20 @@ class Canvas:
         self.screen_size = self.screen.get_size()
 
         self.points = []
-        self.bounds = 2
         self.max_iterations = 100
-
-
 
         for x in range(0, SCREEN_SIZE[0]): 
             for y in range(0, SCREEN_SIZE[1]): 
                 ### test a point
                 c = to_math_coords([x,y])
                 is_included = True
-                if c[0]**2 + c[1]**2 > self.bounds**2: 
+                if c[0]**2 + c[1]**2 > BOUNDS**2: 
                     continue
                 num = c
 
                 for z in range(self.max_iterations):
                     num = [num[0]**2 - num[1]**2 + c[0], 2*num[0]*num[1] + c[1]]
-                    if num[0]**2 + num[1]**2 > self.bounds**2:
-                        print("Exited at ", z) 
+                    if num[0]**2 + num[1]**2 > BOUNDS**2:
                         is_included = False
                         break  # Escaped
                 if(is_included): self.points.append((x,y))
