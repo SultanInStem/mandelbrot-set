@@ -21,4 +21,7 @@ https://github.com/SultanInStem/mandelbrot-set.git
 ``` bash 
 source env/bin/activate
 ```
-3. 
+3. Run the code 
+```bash 
+python3 main.py
+```
