@@ -14,4 +14,6 @@ where z and c are complex numbers. The set consists of all points c for which re
 
 ## Getting started (MacOs)
 1. Copy the git repository 
-```bash https://github.com/SultanInStem/mandelbrot-set.git```
+```bash 
+https://github.com/SultanInStem/mandelbrot-set.git
+```
