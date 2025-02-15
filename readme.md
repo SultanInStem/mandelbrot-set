@@ -17,3 +17,8 @@ where z and c are complex numbers. The set consists of all points c for which re
 ```bash 
 https://github.com/SultanInStem/mandelbrot-set.git
 ```
+2. Activate Env 
+``` bash 
+source env/bin/activate
+```
+3. 
