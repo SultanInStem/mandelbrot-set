@@ -11,6 +11,7 @@ class Canvas:
         self.screen_size = self.screen.get_size()
 
         self.points = []
+        self.none_set_points = []
         self.max_iterations = 100
 
         for x in range(0, SCREEN_SIZE[0]): 
@@ -19,6 +20,7 @@ class Canvas:
                 c = to_math_coords([x,y])
                 is_included = True
                 if c[0]**2 + c[1]**2 > BOUNDS**2: 
+                    self.none_set_points.append({"x": x, "y": y, "color": (0,0,128)})
                     continue
                 num = c
 
@@ -27,10 +29,8 @@ class Canvas:
                     if num[0]**2 + num[1]**2 > BOUNDS**2:
                         is_included = False
                         break  # Escaped
-                if(is_included): self.points.append((x,y))
-
-
-        print(len(self.points))
+                if(is_included): 
+                    self.points.append((x,y))
 
 
         
@@ -43,9 +43,9 @@ class Canvas:
     def render(self): 
         self.screen.fill((0,0,128))
 
-
         for p in self.points: 
             pygame.draw.circle(self.screen, (0,0,0),p,1,0)
+
 
         pygame.display.flip()
         self.clock.tick(60)
