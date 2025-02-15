@@ -1,8 +1,7 @@
 import pygame
 import sys
-from globals import square_complex_num, get_complex_mag, SCREEN_SIZE, to_math_coords, to_screen_coords
+from globals import SCREEN_SIZE, to_math_coords
 from complex_num import ComplexNumber
-import math
 class Canvas: 
     def __init__(self): 
         pygame.init()
@@ -13,31 +12,30 @@ class Canvas:
         self.screen_size = self.screen.get_size()
 
         self.points = []
-        self.rest = []
-        bounds = 2
-        max_iterations = 100
+        self.bounds = 2
+        self.max_iterations = 100
 
-        ### f(z) = z^2 + c 
 
 
         for x in range(0, SCREEN_SIZE[0]): 
             for y in range(0, SCREEN_SIZE[1]): 
                 ### test a point
                 c = to_math_coords([x,y])
-                seq = [c]
                 is_included = True
-                if c[0]**2 + c[1]**2 > bounds**2: 
+                if c[0]**2 + c[1]**2 > self.bounds**2: 
                     continue
-                for z in range(1, max_iterations):
-                    num = seq[z-1]
-                    res = [num[0]**2 - num[1]**2, 2*num[0]*num[1]]
-                    res[0] += c[0]
-                    res[1] += c[1]
-                    if math.sqrt(res[0]**2 + res[1]**2) > bounds: 
+                num = c
+
+                for z in range(self.max_iterations):
+                    num = [num[0]**2 - num[1]**2 + c[0], 2*num[0]*num[1] + c[1]]
+                    if num[0]**2 + num[1]**2 > self.bounds**2:
+                        print("Exited at ", z) 
                         is_included = False
-                        break
-                    seq.append(res)
+                        break  # Escaped
                 if(is_included): self.points.append((x,y))
+
+
+        print(len(self.points))
 
 
         
@@ -45,10 +43,11 @@ class Canvas:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
-    def update(self):        
+    def update(self):  
         pass 
     def render(self): 
-        self.screen.fill((0,0,0))
+        self.screen.fill((0,0,128))
+
 
         for p in self.points: 
             pygame.draw.circle(self.screen, (0,0,0),p,1,0)
