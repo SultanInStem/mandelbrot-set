@@ -1,7 +1,6 @@
 import pygame
 import sys
 from globals import SCREEN_SIZE, to_math_coords, BOUNDS
-from complex_num import ComplexNumber
 class Canvas: 
     def __init__(self): 
         pygame.init()
